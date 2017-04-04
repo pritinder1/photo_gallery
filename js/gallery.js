@@ -1,15 +1,15 @@
 // requestAnim shim layer by Paul Irish
     window.requestAnimFrame = (function(){
-      return  window.requestAnimationFrame       || 
-              window.webkitRequestAnimationFrame || 
-              window.mozRequestAnimationFrame    || 
-              window.oRequestAnimationFrame      || 
-              window.msRequestAnimationFrame     || 
+      return  window.requestAnimationFrame       ||
+              window.webkitRequestAnimationFrame ||
+              window.mozRequestAnimationFrame    ||
+              window.oRequestAnimationFrame      ||
+              window.msRequestAnimationFrame     ||
               function(/* function */ callback, /* DOMElement */ element){
                 window.setTimeout(callback, 1000 / 60);
               };
     })();
-  
+
 
 // example code from mr doob : http://mrdoob.com/lab/javascript/requestanimationframe/
 
@@ -32,19 +32,73 @@ function animate() {
 
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
 
+function getQueryParams(qs) {
+ qs = qs.split("+").join(" ");
+ var params = {},
+ tokens,
+ re = /[?&]?([^=]+)=([^&]*)/g;
+ while (tokens = re.exec(qs)) {
+ params[decodeURIComponent(tokens[1])]
+ = decodeURIComponent(tokens[2]);
+ }
+ return params;
+}
+var $_GET = getQueryParams(document.location.search);
+//console.log($_GET["json"]); // would output "John"
+
+// URL for the JSON to load by default
+// Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
+var mUrl = 'images.json';
+
+// XMLHttpRequest variable
+var mRequest = new XMLHttpRequest();
+
+mRequest.onreadystatechange = function() {
+  // Do something interesting if file is opened successfully
+  if (mRequest.readyState == 4 && mRequest.status == 200) {
+  try {
+  // Let’s try and see if we can parse JSON
+  mJson = JSON.parse(mRequest.responseText);
+  // Let’s print out the JSON; It will likely show as “obj”
+  for(var i = 0; i < mJson.images.length; i++){
+
+      var myLine = mJson.images[i];
+      mImages.push(new GalleryImage(myLine.imgLocation, myLine.description, myLine.date, myLine.imgPath))
+
+  }
+
+
+  console.log(mImages);
+
+
+  } catch(err) {
+  console.log(err.message)
+  }
+  }
+};
+mRequest.open("GET",mUrl, true);
+mRequest.send();
+
+// creating photo Gallery Object
+
+
 function swapPhoto() {
 	//Add code here to access the #slideShow element.
 	//Access the img element and replace its source
-	//with a new image from your images array which is loaded 
+	//with a new image from your images array which is loaded
 	//from the JSON string
+
+  $('#photo').attr('src', mImages[0].imgPath);
+
 	console.log('swap photo');
 }
 
 // Counter for the mImages array
 var mCurrentIndex = 0;
 
-// XMLHttpRequest variable
-var mRequest = new XMLHttpRequest();
+//mRequest.addEventListener("load", reqListener);
+//mRequest.open("GET", "../images.json");
+//mRequest.send();
 
 // Array holding GalleryImage objects (see below).
 var mImages = [];
@@ -52,9 +106,6 @@ var mImages = [];
 // Holds the retrived JSON information
 var mJson;
 
-// URL for the JSON to load by default
-// Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
-var mUrl = 'insert_url_here_to_image_json';
 
 
 //You can optionally use the following function as your event callback for loading the source of Images from your json data (for HTMLImageObject).
@@ -67,22 +118,31 @@ function makeGalleryImageOnloadCallback(galleryImage) {
 }
 
 $(document).ready( function() {
-	
+
 	// This initially hides the photos' metadata information
-	$('.details').eq(0).hide();
-	
+  $('.details').eq(0).hide();
+
+  $('.moreIndicator').click(function() {
+
+    	$('.details').eq(0).show();
+
+      $(this).removeClass("rot90");
+      $(this).addClass("rot270");
+
+  }, false)
+
 });
 
 window.addEventListener('load', function() {
-	
+
 	console.log('window loaded');
 
 }, false);
 
-function GalleryImage() {
-	//implement me as an object to hold the following data about an image:
-	//1. location where photo was taken
-	//2. description of photo
-	//3. the date when the photo was taken
-	//4. either a String (src URL) or an an HTMLImageObject (bitmap of the photo. https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement)
+function GalleryImage(location, description, date, img) {
+  this.location = location;
+  this.description = description;
+  this.date = date;
+  this.img = img;
+
 }
