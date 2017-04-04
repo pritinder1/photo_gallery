@@ -143,6 +143,20 @@ $(document).ready( function() {
    		}
    	});
 
+    $('#nextPhoto').click(function(){
+    currentTime = new Date().getTime();
+    mLastFrameTime = currentTime;
+    swapPhoto();
+
+  });
+
+  $('#prevPhoto').click(function(){
+  currentTime = new Date().getTime();
+  mLastFrameTime = currentTime;
+  mCurrentIndex -= 2;
+  swapPhoto();
+});
+
 });
 
 window.addEventListener('load', function() {
