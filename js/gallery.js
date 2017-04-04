@@ -132,14 +132,16 @@ $(document).ready( function() {
 	// This initially hides the photos' metadata information
   $('.details').eq(0).hide();
 
-  $('.moreIndicator').click(function() {
-
-    	$('.details').eq(0).show();
-
-      $(this).removeClass("rot90");
-      $(this).addClass("rot270");
-
-  }, false)
+  $('.moreIndicator').click(function(){
+   		$('.details').fadeToggle('slow', 'linear');
+   		if($('.moreIndicator').hasClass('rot90')){
+   			$('.moreIndicator').removeClass('rot90');
+   			$('.moreIndicator').addClass('rot270');
+   		}else{
+   			$('.moreIndicator').removeClass('rot270');
+   			$('.moreIndicator').addClass('rot90');
+   		}
+   	});
 
 });
 
