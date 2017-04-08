@@ -1,0 +1,65 @@
+{
+    "images": [
+        {
+            "imgPath": "img/pri/0.png",
+            "imgLocation": "Florida",
+            "description": "Outdoor Conference 2016",
+            "date": "01/01/2016"
+        },
+        {
+            "imgPath": "img/pri/1.png",
+            "imgLocation": "New York",
+            "description": "Forest Valley",
+            "date": "01/02/2016"
+        },
+        {
+            "imgPath": "img/pri/2.png",
+            "imgLocation": "Virgina",
+            "description": "Photoshoot",
+            "date": "01/03/2016"
+        },
+        {
+            "imgPath": "img/pri/3.png",
+            "imgLocation": "India",
+            "description": "Summer Trip",
+            "date": "01/04/2016"
+        },
+        {
+            "imgPath": "img/pri/4.png",
+            "imgLocation": "Newark",
+            "description": "Sigma Pi E-Board",
+            "date": "01/05/2016"
+        },
+        {
+            "imgPath": "img/pri/5.png",
+            "imgLocation": "Newark",
+            "description": "Big/Little",
+            "date": "01/06/2016"
+        },
+        {
+            "imgPath": "img/pri/6.png",
+            "imgLocation": "South Carliona",
+            "description": "Indoor Confernece 2016",
+            "date": "01/07/2016"
+        },
+        {
+            "imgPath": "img/pri/7.png",
+            "imgLocation": "St. Louis",
+            "description": "Sigma Pi Convocation 2017",
+            "date": "01/08/2016"
+        },
+        {
+            "imgPath": "img/pri/8.png",
+            "imgLocation": "Virgina",
+            "description": "Thanksgiving",
+            "date": "01/09/2016"
+        },
+        {
+            "imgPath": "img/pri/9.png",
+            "imgLocation": "South Brunswick ",
+            "description": "Garba",
+            "date": "01/10/2016"
+        }
+     
+  ]
+}

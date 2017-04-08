@@ -44,11 +44,19 @@ function getQueryParams(qs) {
  return params;
 }
 var $_GET = getQueryParams(document.location.search);
-//console.log($_GET["json"]); // would output "John"
+console.log($_GET["json"]);
 
+// Counter for the mImages array
+var mCurrentIndex = 0;
 // URL for the JSON to load by default
 // Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
-var mUrl = 'images.json';
+var mUrl = $_GET['json'];
+
+if(mUrl == undefined){
+
+    mUrl = 'images.json';
+
+}
 
 // XMLHttpRequest variable
 var mRequest = new XMLHttpRequest();
@@ -103,8 +111,7 @@ function swapPhoto() {
   mCurrentIndex++;
 }
 
-// Counter for the mImages array
-var mCurrentIndex = 0;
+
 
 //mRequest.addEventListener("load", reqListener);
 //mRequest.open("GET", "../images.json");
